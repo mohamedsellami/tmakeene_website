@@ -55,7 +55,8 @@ export default function HomeLandingPage() {
         <p className="mt-4 max-w-md text-sm leading-relaxed text-off-white/95 sm:text-base">
           <span className="font-bold">📍ملاحظة:</span>{" "}
           <span className="font-medium">
-            عند تحميل التطبيق، اسمح بتثبيت التطبيقات من مصادر غير معروفة إذا طلب
+            عند تحميل التطبيق، قد يظهر تحذير من المتصفح، هذا طبيعي، اضغط تحميل
+            على أي حال. ثم اسمح بتثبيت التطبيقات من مصادر غير معروفة إذا طلب
             منك الهاتف ذلك.
           </span>
         </p>
