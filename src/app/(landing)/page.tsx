@@ -8,10 +8,16 @@ const APK_HREF =
     : "/downloads/tamkeen.apk";
 const APK_FILENAME = "tamkeen.apk";
 
+const envWebApp = process.env.NEXT_PUBLIC_WEB_APP_URL;
+const WEB_APP_HREF =
+  envWebApp && envWebApp.length > 0
+    ? envWebApp.replace(/\/$/, "")
+    : "https://app.tamkeene.com";
+
 export const metadata: Metadata = {
   title: "تمكين — مراجعة الرياضيات للشهادة المتوسطة",
   description:
-    "تمكين يساعدك على مراجعة الرياضيات بطريقة تفاعلية ترسخ الفهم. حمّل التطبيق.",
+    "تمكين يساعدك على مراجعة الرياضيات بطريقة تفاعلية ترسخ الفهم. جرّب على الويب أو حمّل التطبيق.",
 };
 
 export default function HomeLandingPage() {
@@ -34,23 +40,43 @@ export default function HomeLandingPage() {
           تمكين يساعدك على مراجعة الرياضيات بطريقة تفاعلية ترسخ الفهم
         </h1>
 
-        <a
-          href={APK_HREF}
-          download={APK_FILENAME}
-          className="mt-6 inline-flex max-w-full flex-row items-center justify-center gap-3 rounded-[10px] bg-off-white px-4 py-3.5 text-midnight-blue shadow-sm transition hover:opacity-95 active:opacity-90"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/assets/icons/android.svg"
-            alt=""
-            width={28}
-            height={28}
-            className="h-7 w-7 shrink-0 object-contain"
-          />
-          <span className="text-base font-bold sm:text-lg">
-            تحميل تطبيق تمكين!
-          </span>
-        </a>
+        <p className="mt-4 max-w-lg text-sm font-medium leading-relaxed text-off-white/90 sm:text-base">
+          جرّب تمكين مباشرة من المتصفح دون تثبيت، أو حمّل تطبيق أندرويد.
+        </p>
+
+        <div className="mx-auto mt-5 flex w-full max-w-sm flex-col self-center sm:mt-6">
+          <a
+            href={WEB_APP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full flex-row items-center justify-center gap-3 rounded-[10px] bg-classic-blue-green px-4 py-3.5 text-off-white shadow-sm transition hover:opacity-95 active:opacity-90"
+          >
+            <span className="h-7 w-7 shrink-0" aria-hidden />
+            <span className="text-base font-bold sm:text-lg">
+              جرّب على الويب
+            </span>
+          </a>
+
+          <p className="mt-3 text-sm font-medium text-off-white/75">أو</p>
+
+          <a
+            href={APK_HREF}
+            download={APK_FILENAME}
+            className="mt-3 inline-flex w-full flex-row items-center justify-center gap-3 rounded-[10px] bg-off-white px-4 py-3.5 text-midnight-blue shadow-sm transition hover:opacity-95 active:opacity-90"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/icons/android.svg"
+              alt=""
+              width={28}
+              height={28}
+              className="h-7 w-7 shrink-0 object-contain"
+            />
+            <span className="text-base font-bold sm:text-lg">
+              تحميل تطبيق تمكين!
+            </span>
+          </a>
+        </div>
 
         <p className="mt-4 max-w-md text-sm leading-relaxed text-off-white/95 sm:text-base">
           <span className="font-bold">📍ملاحظة:</span>{" "}
