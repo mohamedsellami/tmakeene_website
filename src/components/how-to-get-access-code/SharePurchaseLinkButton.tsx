@@ -1,6 +1,20 @@
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
 import { useCallback, useEffect, useState } from "react";
+
+function trackSharePurchaseLink(params: {
+  action: string;
+  entry?: string;
+  channel?: string;
+}) {
+  sendGAEvent("event", "share_purchase_link", {
+    action: params.action,
+    ...(params.entry ? { entry: params.entry } : {}),
+    ...(params.channel ? { channel: params.channel } : {}),
+    page_path: "/how-to-get-access-code",
+  });
+}
 
 const SHARE_PATH = "/guardian-sign-up";
 
@@ -65,12 +79,17 @@ export default function SharePurchaseLinkButton() {
     };
   }, [sheetOpen, closeSheet]);
 
-  const openAppPicker = useCallback(() => {
-    setSheetAlert(null);
-    setSheetOpen(true);
-  }, []);
+  const openAppPicker = useCallback(
+    (entry: "primary_fallback" | "direct_picker_link") => {
+      setSheetAlert(null);
+      setSheetOpen(true);
+      trackSharePurchaseLink({ action: "sheet_opened", entry });
+    },
+    [],
+  );
 
   const handlePrimaryClick = useCallback(async () => {
+    trackSharePurchaseLink({ action: "primary_share_click" });
     const url = getShareUrl();
 
     if (typeof navigator.share === "function") {
@@ -93,6 +112,7 @@ export default function SharePurchaseLinkButton() {
       for (const data of attempts) {
         try {
           await navigator.share(data);
+          trackSharePurchaseLink({ action: "native_share_completed" });
           return;
         } catch (err) {
           if (err instanceof DOMException && err.name === "AbortError") {
@@ -102,7 +122,7 @@ export default function SharePurchaseLinkButton() {
       }
     }
 
-    openAppPicker();
+    openAppPicker("primary_fallback");
   }, [openAppPicker]);
 
   const handleCopy = useCallback(async () => {
@@ -111,6 +131,7 @@ export default function SharePurchaseLinkButton() {
     setSheetAlert(null);
     try {
       await navigator.clipboard.writeText(fullText);
+      trackSharePurchaseLink({ action: "channel_chosen", channel: "copy" });
       closeSheet();
       showFeedback("تم نسخ النص. الصقه في أي تطبيق تريد.");
     } catch {
@@ -144,7 +165,7 @@ export default function SharePurchaseLinkButton() {
       </button>
       <button
         type="button"
-        onClick={openAppPicker}
+        onClick={() => openAppPicker("direct_picker_link")}
         className="mt-3 w-full text-center text-sm font-medium text-grey underline-offset-2 transition hover:text-primary-text hover:underline"
       >
         اختر تطبيقاً للمشاركة (ماسنجر، واتساب، تيليجرام…)
@@ -207,7 +228,13 @@ export default function SharePurchaseLinkButton() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full rounded-[10px] border border-light-grey bg-off-white px-4 py-3 text-center text-base font-semibold text-primary-text transition hover:bg-white"
-                  onClick={closeSheet}
+                  onClick={() => {
+                    trackSharePurchaseLink({
+                      action: "channel_chosen",
+                      channel: "whatsapp",
+                    });
+                    closeSheet();
+                  }}
                 >
                   واتساب
                 </a>
@@ -216,6 +243,10 @@ export default function SharePurchaseLinkButton() {
                 <button
                   type="button"
                   onClick={() => {
+                    trackSharePurchaseLink({
+                      action: "channel_chosen",
+                      channel: "messenger",
+                    });
                     tryOpenAppUrl(links.messenger);
                     closeSheet();
                   }}
@@ -228,6 +259,10 @@ export default function SharePurchaseLinkButton() {
                 <button
                   type="button"
                   onClick={() => {
+                    trackSharePurchaseLink({
+                      action: "channel_chosen",
+                      channel: "viber",
+                    });
                     tryOpenAppUrl(links.viber);
                     closeSheet();
                   }}
@@ -242,7 +277,13 @@ export default function SharePurchaseLinkButton() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full rounded-[10px] border border-light-grey bg-off-white px-4 py-3 text-center text-base font-semibold text-primary-text transition hover:bg-white"
-                  onClick={closeSheet}
+                  onClick={() => {
+                    trackSharePurchaseLink({
+                      action: "channel_chosen",
+                      channel: "telegram",
+                    });
+                    closeSheet();
+                  }}
                 >
                   تيليجرام
                 </a>
@@ -251,7 +292,13 @@ export default function SharePurchaseLinkButton() {
                 <a
                   href={links.sms}
                   className="block w-full rounded-[10px] border border-light-grey bg-off-white px-4 py-3 text-center text-base font-semibold text-primary-text transition hover:bg-white"
-                  onClick={closeSheet}
+                  onClick={() => {
+                    trackSharePurchaseLink({
+                      action: "channel_chosen",
+                      channel: "sms",
+                    });
+                    closeSheet();
+                  }}
                 >
                   رسالة نصية (SMS)
                 </a>
