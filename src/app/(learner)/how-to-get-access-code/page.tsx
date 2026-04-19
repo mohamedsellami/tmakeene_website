@@ -5,7 +5,7 @@ import SharePurchaseLinkButton from "@/components/how-to-get-access-code/SharePu
 export const metadata: Metadata = {
   title: "كيف تحصل على رمز الوصول؟ | تمكين",
   description:
-    "شرح بسيط لكيفية الحصول على رمز الوصول بعد شراء المسار من ولي الأمر.",
+    "شرح بسيط لكيفية الحصول على رمز الوصول عبر مشاركة رابط التسجيل مع ولي الأمر.",
 };
 
 export default function HowToGetAccessCodePage() {
@@ -20,12 +20,10 @@ export default function HowToGetAccessCodePage() {
             لإكمال التعلم، تحتاج إلى رمز الوصول 👇
           </p>
           <p className="mt-6 text-base leading-relaxed text-primary-text sm:text-lg">
-            عند قيام ولي أمرك بشراء المسار{" "}
-            <span className="font-bold">
-              (1500 دج - مئة و خمسين ألف - الدفع مرة واحدة فقط)
-            </span>
-            ، سيتم إرسال الرمز إليه عبر الواتساب أو SMS، ثم يشاركه معك لتقوم
-            بإدخاله ومواصلة التعلم.
+            لمواصلة التعلم في تطبيق تمكين، سنقوم بإرسال رمز الوصول إلى ولي
+            أمرك.{" "}
+            <span className="font-bold">شارك رابط التسجيل</span> مع ولي أمرك و
+            سنهتم بالباقي.
           </p>
           <div className="mt-8 w-full sm:mt-10">
             <SharePurchaseLinkButton />

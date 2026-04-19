@@ -160,7 +160,7 @@ export default function SharePurchaseLinkButton() {
           className="h-6 w-6 shrink-0 object-contain"
         />
         <span className="text-center text-base font-bold leading-snug">
-          شارك رابط الشراء مع ولي أمرك
+          شارك رابط التسجيل مع ولي أمرك
         </span>
       </button>
       <button
