@@ -1,9 +1,29 @@
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
+
+function trackGuardianRegistrationSubmitClick() {
+  sendGAEvent("event", "guardian_registration_submit_click", {
+    page_path: "/guardian-sign-up",
+  });
+}
+
+function trackGuardianRegistrationSubmitSuccess() {
+  sendGAEvent("event", "guardian_registration_submit_success", {
+    page_path: "/guardian-sign-up",
+  });
+}
+
+function trackGuardianRegistrationSubmitFailure(errorMessage?: string) {
+  sendGAEvent("event", "guardian_registration_submit_failure", {
+    page_path: "/guardian-sign-up",
+    ...(errorMessage ? { error_message: errorMessage } : {}),
+  });
+}
 
 export default function GuardianRegistrationForm() {
   const [accepted, setAccepted] = useState(false);
@@ -40,16 +60,18 @@ export default function GuardianRegistrationForm() {
         throw new Error(data?.error || "فشل إرسال التسجيل.");
       }
 
+      trackGuardianRegistrationSubmitSuccess();
       setState("success");
       form.reset();
       setAccepted(false);
     } catch (err) {
-      setState("error");
-      setErrorMessage(
+      const message =
         err instanceof Error
           ? err.message
-          : "تعذر إرسال التسجيل حالياً. حاول مرة أخرى.",
-      );
+          : "تعذر إرسال التسجيل حالياً. حاول مرة أخرى.";
+      trackGuardianRegistrationSubmitFailure(message);
+      setState("error");
+      setErrorMessage(message);
     }
   }
 
@@ -153,6 +175,7 @@ export default function GuardianRegistrationForm() {
 
       <button
         type="submit"
+        onClick={trackGuardianRegistrationSubmitClick}
         disabled={!accepted || state === "loading"}
         className="w-full rounded-[10px] bg-primary-blue py-3.5 text-base font-bold text-off-white shadow-sm transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-50"
       >
