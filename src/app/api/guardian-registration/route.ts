@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 type Payload = {
+  name?: string;
   firstName?: string;
   lastName?: string;
   phone?: string;
@@ -15,11 +16,13 @@ const fromEmail =
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as Payload;
+    const name = (body.name || "").trim();
     const firstName = (body.firstName || "").trim();
     const lastName = (body.lastName || "").trim();
+    const fullName = name || `${firstName} ${lastName}`.trim();
     const phone = (body.phone || "").trim();
 
-    if (!firstName || !lastName || !phone) {
+    if (!fullName || !phone) {
       return NextResponse.json(
         { error: "يرجى ملء جميع الحقول المطلوبة." },
         { status: 400 },
@@ -41,8 +44,7 @@ export async function POST(request: Request) {
       subject: "تسجيل جديد من صفحة ولي الأمر - تمكين",
       text: [
         "تم استلام تسجيل جديد:",
-        `الاسم: ${firstName}`,
-        `اللقب: ${lastName}`,
+        `الاسم: ${fullName}`,
         `رقم الهاتف: ${phone}`,
       ].join("\n"),
     });

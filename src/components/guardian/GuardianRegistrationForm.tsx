@@ -41,8 +41,7 @@ export default function GuardianRegistrationForm() {
 
     const formData = new FormData(form);
     const payload = {
-      firstName: String(formData.get("firstName") || ""),
-      lastName: String(formData.get("lastName") || ""),
+      name: String(formData.get("name") || ""),
       phone: String(formData.get("phone") || ""),
     };
 
@@ -97,30 +96,16 @@ export default function GuardianRegistrationForm() {
       noValidate
     >
       <div>
-        <label htmlFor="guardian-first-name" className="sr-only">
-          إسم ولي الأمر
+        <label htmlFor="guardian-name" className="sr-only">
+          الاسم
         </label>
         <input
-          id="guardian-first-name"
-          name="firstName"
+          id="guardian-name"
+          name="name"
           type="text"
           required
-          autoComplete="given-name"
-          placeholder="إسم ولي الأمر"
-          className="w-full rounded-[10px] border border-light-grey bg-white px-4 py-3 text-base text-primary-text placeholder:text-cool-grey focus:border-primary-blue focus:outline-none focus:ring-2 focus:ring-primary-blue/20"
-        />
-      </div>
-      <div>
-        <label htmlFor="guardian-last-name" className="sr-only">
-          لقب ولي الأمر
-        </label>
-        <input
-          id="guardian-last-name"
-          name="lastName"
-          type="text"
-          required
-          autoComplete="family-name"
-          placeholder="لقب ولي الأمر"
+          autoComplete="name"
+          placeholder="الاسم"
           className="w-full rounded-[10px] border border-light-grey bg-white px-4 py-3 text-base text-primary-text placeholder:text-cool-grey focus:border-primary-blue focus:outline-none focus:ring-2 focus:ring-primary-blue/20"
         />
       </div>
