@@ -16,6 +16,22 @@ export default function GuardianSignUpPage() {
     <>
       <section className="bg-off-white px-4 pb-8 pt-12 sm:px-6 sm:pt-16">
         <div className="mx-auto max-w-3xl">
+          <div className="mx-auto mb-8 w-full max-w-sm overflow-hidden rounded-2xl bg-black shadow-sm sm:mb-10">
+            <div className="aspect-[9/16] w-full">
+              <video
+                className="h-full w-full object-cover"
+                src="/assets/videos/guardian-signup-intro.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                preload="metadata"
+              >
+                متصفحك لا يدعم تشغيل الفيديو.
+              </video>
+            </div>
+          </div>
           <div id="register" className="scroll-mt-24">
             <h2 className="text-center text-2xl font-bold text-midnight-blue sm:text-3xl">
               إختبار سريع لتحديد نقاط الضعف
