@@ -1,6 +1,7 @@
 "use client";
 
 import { sendGAEvent } from "@next/third-parties/google";
+import { useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
@@ -27,6 +28,10 @@ function trackSubmitFailure(errorMessage?: string) {
 }
 
 export default function FreelanceEnglishRegistrationForm() {
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("user_id")?.trim() || "";
+  const contentId = searchParams.get("content_id")?.trim() || "";
+
   const [state, setState] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -44,6 +49,8 @@ export default function FreelanceEnglishRegistrationForm() {
       phone: String(formData.get("phone") || ""),
       email: String(formData.get("email") || ""),
       course: "freelance-english",
+      ...(userId ? { user_id: userId } : {}),
+      ...(contentId ? { content_id: contentId } : {}),
     };
 
     try {

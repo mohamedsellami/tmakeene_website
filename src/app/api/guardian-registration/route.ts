@@ -8,6 +8,8 @@ type Payload = {
   phone?: string;
   email?: string;
   course?: string;
+  user_id?: string;
+  content_id?: string;
 };
 
 const resendApiKey = process.env.RESEND_API_KEY;
@@ -25,6 +27,8 @@ export async function POST(request: Request) {
     const phone = (body.phone || "").trim();
     const email = (body.email || "").trim();
     const course = (body.course || "").trim();
+    const userId = (body.user_id || "").trim();
+    const contentId = (body.content_id || "").trim();
 
     if (!fullName || !phone) {
       return NextResponse.json(
@@ -64,6 +68,12 @@ export async function POST(request: Request) {
     }
     if (course) {
       lines.push(`المسار: ${course}`);
+    }
+    if (userId) {
+      lines.push(`معرّف المستخدم: ${userId}`);
+    }
+    if (contentId) {
+      lines.push(`معرّف المحتوى: ${contentId}`);
     }
 
     await resend.emails.send({

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import FreelanceEnglishHero from "@/components/freelance-english/FreelanceEnglishHero";
 import FreelanceEnglishRegistrationForm from "@/components/freelance-english/FreelanceEnglishRegistrationForm";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
@@ -26,7 +27,9 @@ export default function FreelanceEnglishPage() {
               لاتفوت الفرصة، الأماكن محدودة.
             </p>
             <div className="mt-8">
-              <FreelanceEnglishRegistrationForm />
+              <Suspense fallback={null}>
+                <FreelanceEnglishRegistrationForm />
+              </Suspense>
             </div>
           </div>
         </div>
