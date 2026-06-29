@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (course === "freelance_english" && !email) {
+    if (course === "freelance-english" && !email) {
       return NextResponse.json(
         { error: "يرجى ملء جميع الحقول المطلوبة." },
         { status: 400 },
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     const resend = new Resend(resendApiKey);
 
     const subject =
-      course === "freelance_english"
+      course === "freelance-english"
         ? "تسجيل جديد — مسار Freelance English - تفكيرة"
         : "تسجيل جديد من صفحة ولي الأمر - تفكيرة";
 

@@ -26,7 +26,7 @@ export default function HomeLandingPage() {
       <header className="flex justify-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/assets/logo_white_arabic_horizontal.svg"
+          src="/assets/tafkira_logo_horizantal_white.svg"
           alt="تفكيرة"
           className="h-auto max-h-14 w-auto max-w-[min(100%,280px)] object-contain"
           width={280}

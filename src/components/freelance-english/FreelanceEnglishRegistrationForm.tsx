@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
-const PAGE_PATH = "/freelance_english";
+const PAGE_PATH = "/freelance-english";
 
 function trackSubmitClick() {
   sendGAEvent("event", "guardian_registration_submit_click", {
@@ -43,7 +43,7 @@ export default function FreelanceEnglishRegistrationForm() {
       name: String(formData.get("name") || ""),
       phone: String(formData.get("phone") || ""),
       email: String(formData.get("email") || ""),
-      course: "freelance_english",
+      course: "freelance-english",
     };
 
     try {

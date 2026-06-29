@@ -10,13 +10,13 @@ const DEFAULT_FOOTER_LINKS = [
 ] as const;
 
 const FREELANCE_ENGLISH_FOOTER_LINKS = [
-  { href: "/freelance_english", label: "الرئيسية" },
+  { href: "/freelance-english", label: "الرئيسية" },
 ] as const;
 
 function useFooterLinks() {
   const pathname = usePathname();
 
-  if (pathname === "/freelance_english") {
+  if (pathname === "/freelance-english") {
     return FREELANCE_ENGLISH_FOOTER_LINKS;
   }
 
@@ -32,7 +32,7 @@ export default function GuardianSiteFooter() {
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-start">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/assets/logo_white_arabic_horizontal.svg"
+            src="/assets/tafkira_logo_horizantal_white.svg"
             alt="تفكيرة"
             className="h-auto max-h-12 w-auto max-w-[240px] object-contain opacity-95"
             width={240}

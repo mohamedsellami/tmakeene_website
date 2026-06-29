@@ -10,7 +10,7 @@ const DEFAULT_NAV_LINKS = [
   { href: "/terms-and-conditions", label: "الشروط والأحكام" },
 ] as const;
 
-const FREELANCE_ENGLISH_HOME = "/freelance_english";
+const FREELANCE_ENGLISH_HOME = "/freelance-english";
 
 function useSiteNav() {
   const pathname = usePathname();
@@ -52,7 +52,7 @@ export default function GuardianSiteHeader() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/assets/logo_blue_arabic_horizontal.svg"
+            src="/assets/tafkira_logo_horizantal_midnight.svg"
             alt="تفكيرة"
             className="h-auto max-h-11 w-auto max-w-[200px] object-contain sm:max-h-12"
             width={200}

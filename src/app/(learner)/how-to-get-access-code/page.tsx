@@ -38,7 +38,7 @@ export default function HowToGetAccessCodePage() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/assets/logo_blue_arabic_horizontal.svg"
+            src="/assets/tafkira_logo_horizantal_midnight.svg"
             alt="تفكيرة"
             className="h-auto max-h-14 w-auto max-w-[min(100%,320px)] object-contain object-center"
             width={320}
