@@ -3,7 +3,7 @@ import Link from "next/link";
 import SharePurchaseLinkButton from "@/components/how-to-get-access-code/SharePurchaseLinkButton";
 
 export const metadata: Metadata = {
-  title: "كيف تحصل على رمز الوصول؟ | تمكين",
+  title: "كيف تحصل على رمز الوصول؟ | تفكيرة",
   description:
     "شرح بسيط لكيفية الحصول على رمز الوصول عبر مشاركة رابط التسجيل مع ولي الأمر.",
 };
@@ -20,7 +20,7 @@ export default function HowToGetAccessCodePage() {
             لإكمال التعلم، تحتاج إلى رمز الوصول 👇
           </p>
           <p className="mt-6 text-base leading-relaxed text-primary-text sm:text-lg">
-            لمواصلة التعلم في تطبيق تمكين، سنقوم بإرسال رمز الوصول إلى ولي
+            لمواصلة التعلم في تطبيق تفكيرة، سنقوم بإرسال رمز الوصول إلى ولي
             أمرك.{" "}
             <span className="font-bold">شارك رابط التسجيل</span> مع ولي أمرك و
             سنهتم بالباقي.
@@ -34,12 +34,12 @@ export default function HowToGetAccessCodePage() {
         <Link
           href="/"
           className="inline-block transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-midnight-blue"
-          aria-label="الصفحة الرئيسية — تمكين"
+          aria-label="الصفحة الرئيسية — تفكيرة"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/logo_blue_arabic_horizontal.svg"
-            alt="تمكين"
+            alt="تفكيرة"
             className="h-auto max-h-14 w-auto max-w-[min(100%,320px)] object-contain object-center"
             width={320}
             height={64}

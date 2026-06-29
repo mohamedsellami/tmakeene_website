@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "الشروط والأحكام | تمكين",
-  description: "الشروط والأحكام لاستخدام تمكين.",
+  title: "الشروط والأحكام | تفكيرة",
+  description: "الشروط والأحكام لاستخدام تفكيرة.",
 };
 
 export default function TermsAndConditionsPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <h1 className="text-2xl font-bold text-midnight-blue sm:text-3xl">
-        الشروط والأحكام لتطبيق &quot;تمكين&quot;
+        الشروط والأحكام لتطبيق &quot;تفكيرة&quot;
       </h1>
 
       <div className="mt-8 space-y-6 text-base leading-relaxed text-primary-text">
@@ -60,7 +60,7 @@ export default function TermsAndConditionsPage() {
         <section>
           <h2 className="font-bold text-midnight-blue">6. الملكية الفكرية</h2>
           <ul className="list-disc space-y-1 pe-6">
-            <li>جميع المحتويات (الدروس، التمارين، التصميم) مملوكة لتطبيق &quot;تمكين&quot;.</li>
+            <li>جميع المحتويات (الدروس، التمارين، التصميم) مملوكة لتطبيق &quot;تفكيرة&quot;.</li>
             <li>يمنع نسخ أو إعادة نشر أو توزيع المحتوى دون إذن مسبق.</li>
           </ul>
         </section>

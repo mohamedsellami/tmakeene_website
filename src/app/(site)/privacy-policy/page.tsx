@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "سياسة الخصوصية | تمكين",
-  description: "سياسة الخصوصية لتطبيق تمكين.",
+  title: "سياسة الخصوصية | تفكيرة",
+  description: "سياسة الخصوصية لتطبيق تفكيرة.",
 };
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <h1 className="text-2xl font-bold text-midnight-blue sm:text-3xl">
-        سياسة الخصوصية لتطبيق &quot;تمكين&quot;
+        سياسة الخصوصية لتطبيق &quot;تفكيرة&quot;
       </h1>
 
       <div className="mt-8 space-y-6 text-base leading-relaxed text-primary-text">
         <section>
           <h2 className="font-bold text-midnight-blue">1. مقدمة</h2>
           <p>
-            نحن في تطبيق &quot;تمكين&quot; نلتزم بحماية خصوصية المستخدمين، خاصة الأطفال.
+            نحن في تطبيق &quot;تفكيرة&quot; نلتزم بحماية خصوصية المستخدمين، خاصة الأطفال.
             تم تصميم التطبيق ليكون بيئة تعليمية آمنة لا تعتمد على جمع أو معالجة
             أي بيانات شخصية تخص الأطفال.
           </p>
@@ -39,7 +39,7 @@ export default function PrivacyPolicyPage() {
               الهاتف، الموقع الجغرافي).
             </li>
             <li>إنشاء حسابات شخصية للأطفال.</li>
-            <li>تمكين أي وسيلة تواصل بين الأطفال أو مع أطراف خارجية.</li>
+            <li>تفعيل أي وسيلة تواصل بين الأطفال أو مع أطراف خارجية.</li>
           </ul>
         </section>
 
@@ -137,7 +137,7 @@ export default function PrivacyPolicyPage() {
           <h2 className="font-bold text-midnight-blue">رسالة طمأنة للأولياء</h2>
           <p className="mt-2">
             نحن ندرك أن أمان الأطفال هو الأولوية الأولى لكل ولي أمر. تم تصميم
-            تطبيق &quot;تمكين&quot; ليكون بيئة تعليمية مغلقة وآمنة:
+            تطبيق &quot;تفكيرة&quot; ليكون بيئة تعليمية مغلقة وآمنة:
           </p>
           <ul className="mt-2 list-disc space-y-1 pe-6">
             <li>لا يوجد تواصل مع غرباء</li>

@@ -4,7 +4,7 @@ import GuardianRegistrationForm from "@/components/guardian/GuardianRegistration
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
-  title: "تمكين — مسار الرياضيات لولي الأمر",
+  title: "تفكيرة — مسار الرياضيات لولي الأمر",
   description:
     "مراجعة تفاعلية في الرياضيات لابنك، تمارين ودروس منظمة. اشترِ المسار أو تواصل معنا.",
 };
@@ -53,7 +53,7 @@ export default function GuardianSignUpPage() {
           <GuardianFAQ />
 
           <p className="mx-auto mt-10 max-w-xl text-center text-base font-medium text-midnight-blue sm:text-lg">
-            في حال وجود أي استفسار، فريق تمكين جاهز لمساعدتكم.
+            في حال وجود أي استفسار، فريق تفكيرة جاهز لمساعدتكم.
           </p>
           <div className="mt-6 flex justify-center">
             <a

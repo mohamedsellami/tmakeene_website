@@ -6,6 +6,8 @@ type Payload = {
   firstName?: string;
   lastName?: string;
   phone?: string;
+  email?: string;
+  course?: string;
 };
 
 const resendApiKey = process.env.RESEND_API_KEY;
@@ -21,8 +23,17 @@ export async function POST(request: Request) {
     const lastName = (body.lastName || "").trim();
     const fullName = name || `${firstName} ${lastName}`.trim();
     const phone = (body.phone || "").trim();
+    const email = (body.email || "").trim();
+    const course = (body.course || "").trim();
 
     if (!fullName || !phone) {
+      return NextResponse.json(
+        { error: "يرجى ملء جميع الحقول المطلوبة." },
+        { status: 400 },
+      );
+    }
+
+    if (course === "freelance_english" && !email) {
       return NextResponse.json(
         { error: "يرجى ملء جميع الحقول المطلوبة." },
         { status: 400 },
@@ -38,15 +49,28 @@ export async function POST(request: Request) {
 
     const resend = new Resend(resendApiKey);
 
+    const subject =
+      course === "freelance_english"
+        ? "تسجيل جديد — مسار Freelance English - تفكيرة"
+        : "تسجيل جديد من صفحة ولي الأمر - تفكيرة";
+
+    const lines = [
+      "تم استلام تسجيل جديد:",
+      `الاسم: ${fullName}`,
+      `رقم الهاتف: ${phone}`,
+    ];
+    if (email) {
+      lines.push(`البريد الإلكتروني: ${email}`);
+    }
+    if (course) {
+      lines.push(`المسار: ${course}`);
+    }
+
     await resend.emails.send({
       from: fromEmail,
       to: toEmail,
-      subject: "تسجيل جديد من صفحة ولي الأمر - تمكين",
-      text: [
-        "تم استلام تسجيل جديد:",
-        `الاسم: ${fullName}`,
-        `رقم الهاتف: ${phone}`,
-      ].join("\n"),
+      subject,
+      text: lines.join("\n"),
     });
 
     return NextResponse.json({ ok: true });

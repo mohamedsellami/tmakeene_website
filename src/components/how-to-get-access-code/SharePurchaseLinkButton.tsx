@@ -30,9 +30,9 @@ function getShareUrl(): string {
   return `${origin}${SHARE_PATH}`;
 }
 
-const SHARE_TITLE = "التسجيل كولي أمر — تمكين";
+const SHARE_TITLE = "التسجيل كولي أمر — تفكيرة";
 const SHARE_TEXT =
-  "تطبيق تمكين سيساعدني في مراجعة الرياضيات، اضغط هنا لأواصل المراجعة:";
+  "تطبيق تفكيرة سيساعدني في مراجعة الرياضيات، اضغط هنا لأواصل المراجعة:";
 
 function buildSharePayload(url: string) {
   const fullText = `${SHARE_TEXT}\n${url}`;

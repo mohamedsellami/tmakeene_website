@@ -1,16 +1,37 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const NAV_LINKS = [
+const DEFAULT_NAV_LINKS = [
   { href: "/guardian-sign-up", label: "الرئيسية" },
   { href: "/privacy-policy", label: "سياسة الخصوصية" },
   { href: "/terms-and-conditions", label: "الشروط والأحكام" },
 ] as const;
 
+const FREELANCE_ENGLISH_HOME = "/freelance_english";
+
+function useSiteNav() {
+  const pathname = usePathname();
+  const isFreelanceEnglish = pathname === FREELANCE_ENGLISH_HOME;
+
+  if (isFreelanceEnglish) {
+    return {
+      homeHref: FREELANCE_ENGLISH_HOME,
+      navLinks: [{ href: FREELANCE_ENGLISH_HOME, label: "الرئيسية" }] as const,
+    };
+  }
+
+  return {
+    homeHref: "/guardian-sign-up",
+    navLinks: DEFAULT_NAV_LINKS,
+  };
+}
+
 export default function GuardianSiteHeader() {
   const [open, setOpen] = useState(false);
+  const { homeHref, navLinks } = useSiteNav();
 
   useEffect(() => {
     if (!open) return;
@@ -25,14 +46,14 @@ export default function GuardianSiteHeader() {
     <header className="sticky top-0 z-40 border-b border-light-grey bg-off-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link
-          href="/guardian-sign-up"
+          href={homeHref}
           className="shrink-0"
           onClick={() => setOpen(false)}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/logo_blue_arabic_horizontal.svg"
-            alt="تمكين"
+            alt="تفكيرة"
             className="h-auto max-h-11 w-auto max-w-[200px] object-contain sm:max-h-12"
             width={200}
             height={48}
@@ -44,7 +65,7 @@ export default function GuardianSiteHeader() {
           className="hidden items-center gap-6 md:flex"
           aria-label="التنقل الرئيسي"
         >
-          {NAV_LINKS.map(({ href, label }) => (
+          {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
@@ -102,7 +123,7 @@ export default function GuardianSiteHeader() {
           aria-label="قائمة التنقل"
         >
           <nav className="flex flex-col gap-1 px-4 py-4" aria-label="التنقل">
-            {NAV_LINKS.map(({ href, label }) => (
+            {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}

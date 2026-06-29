@@ -15,9 +15,9 @@ const WEB_APP_HREF =
     : "https://app.tamkeene.com";
 
 export const metadata: Metadata = {
-  title: "تمكين — مراجعة الرياضيات للشهادة المتوسطة",
+  title: "تفكيرة — مراجعة الرياضيات للشهادة المتوسطة",
   description:
-    "تمكين يساعدك على مراجعة الرياضيات بطريقة تفاعلية ترسخ الفهم. جرّب على الويب أو حمّل التطبيق.",
+    "تفكيرة يساعدك على مراجعة الرياضيات بطريقة تفاعلية ترسخ الفهم. جرّب على الويب أو حمّل التطبيق.",
 };
 
 export default function HomeLandingPage() {
@@ -27,7 +27,7 @@ export default function HomeLandingPage() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/assets/logo_white_arabic_horizontal.svg"
-          alt="تمكين"
+          alt="تفكيرة"
           className="h-auto max-h-14 w-auto max-w-[min(100%,280px)] object-contain"
           width={280}
           height={56}
@@ -37,11 +37,11 @@ export default function HomeLandingPage() {
 
       <div className="mt-8 flex flex-col items-center text-center sm:mt-10">
         <h1 className="max-w-xl text-xl font-bold leading-snug text-off-white sm:text-2xl md:text-3xl">
-          تمكين يساعدك على مراجعة الرياضيات بطريقة تفاعلية ترسخ الفهم
+          تفكيرة يساعدك على مراجعة الرياضيات بطريقة تفاعلية ترسخ الفهم
         </h1>
 
         <p className="mt-4 max-w-lg text-sm font-medium leading-relaxed text-off-white/90 sm:text-base">
-          جرّب تمكين مباشرة من المتصفح دون تثبيت، أو حمّل تطبيق أندرويد.
+          جرّب تفكيرة مباشرة من المتصفح دون تثبيت، أو حمّل تطبيق أندرويد.
         </p>
 
         <div className="mx-auto mt-5 flex w-full max-w-sm flex-col self-center sm:mt-6">
@@ -73,7 +73,7 @@ export default function HomeLandingPage() {
               className="h-7 w-7 shrink-0 object-contain"
             />
             <span className="text-base font-bold sm:text-lg">
-              تحميل تطبيق تمكين!
+              تحميل تطبيق تفكيرة!
             </span>
           </a>
         </div>
@@ -92,7 +92,7 @@ export default function HomeLandingPage() {
         <div className="relative aspect-[4/3] w-full max-w-lg">
           <Image
             src="/assets/illustrations/tamkeene_preview_1.png"
-            alt="معاينة تطبيق تمكين"
+            alt="معاينة تطبيق تفكيرة"
             fill
             className="object-contain object-center"
             sizes="(max-width: 768px) 100vw, 32rem"
