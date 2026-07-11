@@ -1,8 +1,24 @@
+"use client";
+
+import {
+  formatPrice,
+  getSessionPrice,
+  type SessionDuration,
+} from "@/lib/freelance-english-params";
+
 const FEATURES = [
-  "8 حصص مباشرة مع أستاذ للتدرب على التحدث",
-  "تطبيق للتدرب بين الحصص",
-  "مشاركة خبرة الأستاذ في الفريلانس",
+  "حصة فردية أنت و الأستاذ فقط",
+  "التدرب على التحدث مباشرة مع الأستاذ المرافق",
+  "خبرة الأستاذ في التحضير للأيلتس ستساعدك على التقدم بشكل أفضل",
 ] as const;
+
+type FreelanceEnglishHeroProps = {
+  sessionTitle: string;
+  teacherName: string;
+  basePrice: number | null;
+  duration: SessionDuration;
+  onDurationChange: (duration: SessionDuration) => void;
+};
 
 function CheckIcon() {
   return (
@@ -27,31 +43,73 @@ function CheckIcon() {
   );
 }
 
-export default function FreelanceEnglishHero() {
-  return (
-    <div className="relative mx-auto mb-8 w-full max-w-sm sm:mb-10">
-      <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2">
-        <span className="inline-block rounded-full bg-warm-amber px-4 py-1.5 text-sm font-bold text-midnight-blue">
-          تبقى 5 أماكن فقط!
-        </span>
-      </div>
+export default function FreelanceEnglishHero({
+  sessionTitle,
+  teacherName,
+  basePrice,
+  duration,
+  onDurationChange,
+}: FreelanceEnglishHeroProps) {
+  const displayPrice = getSessionPrice(basePrice, duration);
 
-      <div className="overflow-hidden rounded-2xl bg-midnight-blue px-5 pb-6 pt-8 text-center text-off-white shadow-sm sm:px-6 sm:pb-7 sm:pt-9">
+  return (
+    <div className="mx-auto mb-8 w-full max-w-sm sm:mb-10">
+      <div className="overflow-hidden rounded-2xl bg-midnight-blue px-5 pb-6 pt-6 text-center text-off-white shadow-sm sm:px-6 sm:pb-7 sm:pt-7">
         <div>
-          <p className="text-sm font-medium text-white/70">عنوان المسار:</p>
+          <p className="text-sm font-medium text-white/70">عنوان الحصة:</p>
           <h1 className="mt-1 text-xl font-bold leading-snug sm:text-2xl">
-            Handle Your English-Speaking Clients Confidently
+            {sessionTitle}
           </h1>
+        </div>
+
+        <div className="mt-5">
+          <p className="text-sm font-medium text-white/70">الاستاذ الموافق</p>
+          <p className="mt-1 text-lg font-bold sm:text-xl">
+            {teacherName || "—"}
+          </p>
         </div>
 
         <hr className="my-5 border-white/20" />
 
         <div>
           <p className="text-sm font-medium text-white/70">السعر:</p>
-          <p className="mt-1 text-3xl font-bold sm:text-4xl">4000 دج</p>
-          <p className="mt-2 text-sm leading-relaxed text-white/80">
-            يتم إسترجاع المبلغ بشكل كامل إذا لم تعجبك الحصة الأولى!
+          <p className="mt-1 text-3xl font-bold sm:text-4xl">
+            {formatPrice(displayPrice)}
           </p>
+          <p className="mt-2 text-sm leading-relaxed text-white/80">
+            لحصة مدتها {duration} دقيقة
+          </p>
+
+          <div
+            className="mx-auto mt-4 inline-flex rounded-full bg-white/10 p-1"
+            role="group"
+            aria-label="مدة الحصة"
+          >
+            <button
+              type="button"
+              onClick={() => onDurationChange(30)}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                duration === 30
+                  ? "bg-primary-blue text-off-white"
+                  : "text-white/80 hover:text-off-white"
+              }`}
+              aria-pressed={duration === 30}
+            >
+              30 دقيقة
+            </button>
+            <button
+              type="button"
+              onClick={() => onDurationChange(60)}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                duration === 60
+                  ? "bg-primary-blue text-off-white"
+                  : "text-white/80 hover:text-off-white"
+              }`}
+              aria-pressed={duration === 60}
+            >
+              60 دقيقة
+            </button>
+          </div>
         </div>
 
         <hr className="my-5 border-white/20" />
@@ -74,7 +132,7 @@ export default function FreelanceEnglishHero() {
           href="#register"
           className="mt-6 flex w-full items-center justify-center rounded-[10px] border-b-4 border-white/30 bg-primary-blue px-6 py-3.5 text-center text-base font-bold text-off-white transition hover:opacity-95"
         >
-          احجز مكانك الآن!
+          إحجز حصتك الآن
         </a>
       </div>
     </div>

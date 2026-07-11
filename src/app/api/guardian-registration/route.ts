@@ -10,6 +10,12 @@ type Payload = {
   course?: string;
   user_id?: string;
   content_id?: string;
+  teacher_name?: string;
+  session_title?: string;
+  session_count?: number;
+  duration_minutes?: number;
+  price_per_session?: number;
+  total_price?: number;
 };
 
 const resendApiKey = process.env.RESEND_API_KEY;
@@ -29,6 +35,12 @@ export async function POST(request: Request) {
     const course = (body.course || "").trim();
     const userId = (body.user_id || "").trim();
     const contentId = (body.content_id || "").trim();
+    const teacherName = (body.teacher_name || "").trim();
+    const sessionTitle = (body.session_title || "").trim();
+    const sessionCount = body.session_count;
+    const durationMinutes = body.duration_minutes;
+    const pricePerSession = body.price_per_session;
+    const totalPrice = body.total_price;
 
     if (!fullName || !phone) {
       return NextResponse.json(
@@ -37,7 +49,17 @@ export async function POST(request: Request) {
       );
     }
 
-    if (course === "freelance-english" && !email) {
+    if (course === "ielts-preparation" && !email) {
+      return NextResponse.json(
+        { error: "يرجى ملء جميع الحقول المطلوبة." },
+        { status: 400 },
+      );
+    }
+
+    if (
+      course === "ielts-preparation" &&
+      (!sessionCount || sessionCount < 1 || !durationMinutes)
+    ) {
       return NextResponse.json(
         { error: "يرجى ملء جميع الحقول المطلوبة." },
         { status: 400 },
@@ -54,8 +76,8 @@ export async function POST(request: Request) {
     const resend = new Resend(resendApiKey);
 
     const subject =
-      course === "freelance-english"
-        ? "تسجيل جديد — مسار Freelance English - تفكيرة"
+      course === "ielts-preparation"
+        ? "تسجيل جديد — مسار IELTS Preparation - تفكيرة"
         : "تسجيل جديد من صفحة ولي الأمر - تفكيرة";
 
     const lines = [
@@ -72,8 +94,26 @@ export async function POST(request: Request) {
     if (userId) {
       lines.push(`معرّف المستخدم: ${userId}`);
     }
+    if (teacherName) {
+      lines.push(`اسم الأستاذ: ${teacherName}`);
+    }
+    if (sessionTitle) {
+      lines.push(`عنوان الحصة: ${sessionTitle}`);
+    }
     if (contentId) {
       lines.push(`معرّف المحتوى: ${contentId}`);
+    }
+    if (sessionCount) {
+      lines.push(`عدد الحصص: ${sessionCount}`);
+    }
+    if (durationMinutes) {
+      lines.push(`مدة الحصة: ${durationMinutes} دقيقة`);
+    }
+    if (pricePerSession !== undefined) {
+      lines.push(`سعر الحصة: ${pricePerSession} دج`);
+    }
+    if (totalPrice !== undefined) {
+      lines.push(`السعر الإجمالي: ${totalPrice} دج`);
     }
 
     await resend.emails.send({

@@ -10,16 +10,16 @@ const DEFAULT_NAV_LINKS = [
   { href: "/terms-and-conditions", label: "الشروط والأحكام" },
 ] as const;
 
-const FREELANCE_ENGLISH_HOME = "/freelance-english";
+const IELTS_PREPARATION_HOME = "/ielts-preparation";
 
 function useSiteNav() {
   const pathname = usePathname();
-  const isFreelanceEnglish = pathname === FREELANCE_ENGLISH_HOME;
+  const isIeltsPreparation = pathname === IELTS_PREPARATION_HOME;
 
-  if (isFreelanceEnglish) {
+  if (isIeltsPreparation) {
     return {
-      homeHref: FREELANCE_ENGLISH_HOME,
-      navLinks: [{ href: FREELANCE_ENGLISH_HOME, label: "الرئيسية" }] as const,
+      homeHref: IELTS_PREPARATION_HOME,
+      navLinks: [{ href: IELTS_PREPARATION_HOME, label: "الرئيسية" }] as const,
     };
   }
 

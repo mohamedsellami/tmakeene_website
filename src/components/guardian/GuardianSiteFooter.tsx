@@ -9,15 +9,15 @@ const DEFAULT_FOOTER_LINKS = [
   { href: "/terms-and-conditions", label: "الشروط والأحكام" },
 ] as const;
 
-const FREELANCE_ENGLISH_FOOTER_LINKS = [
-  { href: "/freelance-english", label: "الرئيسية" },
+const IELTS_PREPARATION_FOOTER_LINKS = [
+  { href: "/ielts-preparation", label: "الرئيسية" },
 ] as const;
 
 function useFooterLinks() {
   const pathname = usePathname();
 
-  if (pathname === "/freelance-english") {
-    return FREELANCE_ENGLISH_FOOTER_LINKS;
+  if (pathname === "/ielts-preparation") {
+    return IELTS_PREPARATION_FOOTER_LINKS;
   }
 
   return DEFAULT_FOOTER_LINKS;
