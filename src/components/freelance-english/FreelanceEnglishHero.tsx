@@ -4,6 +4,7 @@ import {
   formatPrice,
   getSessionPrice,
   type SessionDuration,
+  type MinDuration,
 } from "@/lib/freelance-english-params";
 
 const FEATURES = [
@@ -17,6 +18,7 @@ type FreelanceEnglishHeroProps = {
   teacherName: string;
   basePrice: number | null;
   duration: SessionDuration;
+  minDuration: MinDuration;
   onDurationChange: (duration: SessionDuration) => void;
 };
 
@@ -48,9 +50,13 @@ export default function FreelanceEnglishHero({
   teacherName,
   basePrice,
   duration,
+  minDuration,
   onDurationChange,
 }: FreelanceEnglishHeroProps) {
   const displayPrice = getSessionPrice(basePrice, duration);
+  const availableDurations = ([30, 60, 90, 120] as SessionDuration[]).filter(
+    (d): d is SessionDuration => d >= minDuration,
+  );
 
   return (
     <div className="mx-auto mb-8 w-full max-w-sm sm:mb-10">
@@ -85,30 +91,21 @@ export default function FreelanceEnglishHero({
             role="group"
             aria-label="مدة الحصة"
           >
-            <button
-              type="button"
-              onClick={() => onDurationChange(30)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                duration === 30
-                  ? "bg-primary-blue text-off-white"
-                  : "text-white/80 hover:text-off-white"
-              }`}
-              aria-pressed={duration === 30}
-            >
-              30 دقيقة
-            </button>
-            <button
-              type="button"
-              onClick={() => onDurationChange(60)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                duration === 60
-                  ? "bg-primary-blue text-off-white"
-                  : "text-white/80 hover:text-off-white"
-              }`}
-              aria-pressed={duration === 60}
-            >
-              60 دقيقة
-            </button>
+            {availableDurations.map((d) => (
+              <button
+                key={d}
+                type="button"
+                onClick={() => onDurationChange(d)}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  duration === d
+                    ? "bg-primary-blue text-off-white"
+                    : "text-white/80 hover:text-off-white"
+                }`}
+                aria-pressed={duration === d}
+              >
+                {d} دقيقة
+              </button>
+            ))}
           </div>
         </div>
 

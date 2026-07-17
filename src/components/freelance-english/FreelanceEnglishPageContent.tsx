@@ -13,7 +13,7 @@ import FreelanceEnglishRegistrationForm from "./FreelanceEnglishRegistrationForm
 export default function FreelanceEnglishPageContent() {
   const searchParams = useSearchParams();
   const params = parseFreelanceEnglishParams(searchParams);
-  const [duration, setDuration] = useState<SessionDuration>(30);
+  const [duration, setDuration] = useState<SessionDuration>(params.minDuration);
 
   const pricePerSession = getSessionPrice(params.basePrice, duration);
 
@@ -24,6 +24,7 @@ export default function FreelanceEnglishPageContent() {
         teacherName={params.teacherName}
         basePrice={params.basePrice}
         duration={duration}
+        minDuration={params.minDuration}
         onDurationChange={setDuration}
       />
 
@@ -36,12 +37,14 @@ export default function FreelanceEnglishPageContent() {
         </p>
         <div className="mt-8">
           <FreelanceEnglishRegistrationForm
-            userId={params.userId}
+            learnerId={params.learnerId}
+            tutorId={params.tutorId}
             contentId={params.contentId}
             teacherName={params.teacherName}
             sessionTitle={params.sessionTitle}
             duration={duration}
             onDurationChange={setDuration}
+            minDuration={params.minDuration}
             pricePerSession={pricePerSession}
           />
         </div>

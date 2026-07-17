@@ -1,11 +1,15 @@
-export type SessionDuration = 30 | 60;
+export type SessionDuration = 30 | 60 | 90 | 120;
+
+export type MinDuration = 30 | 60;
 
 export type FreelanceEnglishParams = {
-  userId: string;
+  learnerId: string;
+  tutorId: string;
   contentId: string;
   sessionTitle: string;
   teacherName: string;
   basePrice: number | null;
+  minDuration: MinDuration;
 };
 
 function parsePrice(value: string | null): number | null {
@@ -19,8 +23,13 @@ function parsePrice(value: string | null): number | null {
 export function parseFreelanceEnglishParams(
   searchParams: URLSearchParams,
 ): FreelanceEnglishParams {
+  const minDurationParam = Number(searchParams.get("min_duration"));
+  const minDuration: MinDuration =
+    minDurationParam === 60 ? 60 : minDurationParam === 30 ? 30 : 30;
+
   return {
-    userId: searchParams.get("user_id")?.trim() || "",
+    learnerId: searchParams.get("user_id")?.trim() || "",
+    tutorId: searchParams.get("tutor_id")?.trim() || "",
     contentId: searchParams.get("content_id")?.trim() || "",
     sessionTitle:
       searchParams.get("session_title")?.trim() ||
@@ -31,6 +40,7 @@ export function parseFreelanceEnglishParams(
       searchParams.get("tutor_name")?.trim() ||
       "",
     basePrice: parsePrice(searchParams.get("price")),
+    minDuration,
   };
 }
 
@@ -39,7 +49,9 @@ export function getSessionPrice(
   duration: SessionDuration,
 ): number | null {
   if (basePrice === null) return null;
-  return duration === 60 ? basePrice * 2 : basePrice;
+  // Assumes `basePrice` is the price for a 30-minute session.
+  // Then 60=2x, 90=3x, 120=4x.
+  return (duration / 30) * basePrice;
 }
 
 export function formatPrice(price: number | null): string {

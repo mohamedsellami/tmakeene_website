@@ -5,19 +5,25 @@ import { FormEvent, useState } from "react";
 import {
   formatPrice,
   type SessionDuration,
+  type MinDuration,
 } from "@/lib/freelance-english-params";
+import SessionSlotPicker, {
+  type SelectedSlot,
+} from "./SessionSlotPicker";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
 const PAGE_PATH = "/ielts-preparation";
 
 type FreelanceEnglishRegistrationFormProps = {
-  userId: string;
+  learnerId: string;
+  tutorId: string;
   contentId: string;
   teacherName: string;
   sessionTitle: string;
   duration: SessionDuration;
   onDurationChange: (duration: SessionDuration) => void;
+  minDuration: MinDuration;
   pricePerSession: number | null;
 };
 
@@ -41,49 +47,56 @@ function trackSubmitFailure(errorMessage?: string) {
 }
 
 export default function FreelanceEnglishRegistrationForm({
-  userId,
+  learnerId,
+  tutorId,
   contentId,
   teacherName,
   sessionTitle,
   duration,
   onDurationChange,
+  minDuration,
   pricePerSession,
 }: FreelanceEnglishRegistrationFormProps) {
   const [state, setState] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [selectedSlot, setSelectedSlot] = useState<SelectedSlot | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     if (!form.reportValidity()) return;
 
+    if (!selectedSlot) {
+      setErrorMessage("يرجى اختيار موعد للحصة.");
+      return;
+    }
+
     setState("loading");
     setErrorMessage(null);
 
     const formData = new FormData(form);
-    const sessionCount = Number(formData.get("session_count") || 0);
 
     const payload = {
       name: String(formData.get("name") || ""),
       phone: String(formData.get("phone") || ""),
       email: String(formData.get("email") || ""),
-      course: "ielts-preparation",
-      session_count: sessionCount,
       duration_minutes: duration,
       session_title: sessionTitle,
+      starts_at: selectedSlot.startsAt,
       ...(teacherName ? { teacher_name: teacherName } : {}),
-      ...(userId ? { user_id: userId } : {}),
+      ...(learnerId ? { user_id: learnerId } : {}),
+      ...(tutorId ? { tutor_id: tutorId } : {}),
       ...(contentId ? { content_id: contentId } : {}),
       ...(pricePerSession !== null
         ? {
             price_per_session: pricePerSession,
-            total_price: pricePerSession * sessionCount,
+            total_price: pricePerSession,
           }
         : {}),
     };
 
     try {
-      const res = await fetch("/api/guardian-registration", {
+      const res = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -93,17 +106,18 @@ export default function FreelanceEnglishRegistrationForm({
         const data = (await res.json().catch(() => null)) as
           | { error?: string }
           | null;
-        throw new Error(data?.error || "فشل إرسال التسجيل.");
+        throw new Error(data?.error || "فشل إتمام الحجز.");
       }
 
       trackSubmitSuccess();
       setState("success");
+      setSelectedSlot(null);
       form.reset();
     } catch (err) {
       const message =
         err instanceof Error
           ? err.message
-          : "تعذر إرسال التسجيل حالياً. حاول مرة أخرى.";
+          : "تعذر إتمام الحجز حالياً. حاول مرة أخرى.";
       trackSubmitFailure(message);
       setState("error");
       setErrorMessage(message);
@@ -118,8 +132,8 @@ export default function FreelanceEnglishRegistrationForm({
         aria-live="polite"
       >
         <p className="text-base font-medium leading-relaxed text-midnight-blue sm:text-lg">
-          شكرا! لقد تم التسجيل بنجاح ، سيتم التواصل معك عبر الواتساب أو رقم
-          الهاتف في أقرب وقت.
+          شكراً! تم إرسال طلب الحجز بنجاح. سيتم التواصل معك لتأكيد الموعد عبر
+          الواتساب أو رقم الهاتف في أقرب وقت.
         </p>
       </div>
     );
@@ -174,48 +188,30 @@ export default function FreelanceEnglishRegistrationForm({
         />
       </div>
 
-      <div>
-        <label
-          htmlFor="freelance-session-count"
-          className="mb-2 block text-sm font-semibold text-midnight-blue"
-        >
-          عدد الحصص
-        </label>
-        <input
-          id="freelance-session-count"
-          name="session_count"
-          type="number"
-          min={1}
-          step={1}
-          required
-          defaultValue={1}
-          placeholder="عدد الحصص"
-          className="w-full rounded-[10px] border border-light-grey bg-white px-4 py-3 text-base text-primary-text placeholder:text-cool-grey focus:border-primary-blue focus:outline-none focus:ring-2 focus:ring-primary-blue/20"
-        />
-      </div>
-
       <fieldset>
         <legend className="mb-2 block text-sm font-semibold text-midnight-blue">
           مدة الحصة
         </legend>
         <div className="grid grid-cols-2 gap-3">
-          <label
-            className={`flex cursor-pointer items-center justify-center rounded-[10px] border px-4 py-3 text-sm font-semibold transition ${
-              duration === 30
-                ? "border-primary-blue bg-primary-blue/10 text-primary-blue"
-                : "border-light-grey bg-white text-primary-text"
-            }`}
-          >
-            <input
-              type="radio"
-              name="duration_minutes"
-              value="30"
-              checked={duration === 30}
-              onChange={() => onDurationChange(30)}
-              className="sr-only"
-            />
-            30 دقيقة
-          </label>
+          {minDuration === 30 ? (
+            <label
+              className={`flex cursor-pointer items-center justify-center rounded-[10px] border px-4 py-3 text-sm font-semibold transition ${
+                duration === 30
+                  ? "border-primary-blue bg-primary-blue/10 text-primary-blue"
+                  : "border-light-grey bg-white text-primary-text"
+              }`}
+            >
+              <input
+                type="radio"
+                name="duration_minutes"
+                value="30"
+                checked={duration === 30}
+                onChange={() => onDurationChange(30)}
+                className="sr-only"
+              />
+              30 دقيقة
+            </label>
+          ) : null}
           <label
             className={`flex cursor-pointer items-center justify-center rounded-[10px] border px-4 py-3 text-sm font-semibold transition ${
               duration === 60
@@ -233,6 +229,40 @@ export default function FreelanceEnglishRegistrationForm({
             />
             60 دقيقة
           </label>
+          <label
+            className={`flex cursor-pointer items-center justify-center rounded-[10px] border px-4 py-3 text-sm font-semibold transition ${
+              duration === 90
+                ? "border-primary-blue bg-primary-blue/10 text-primary-blue"
+                : "border-light-grey bg-white text-primary-text"
+            }`}
+          >
+            <input
+              type="radio"
+              name="duration_minutes"
+              value="90"
+              checked={duration === 90}
+              onChange={() => onDurationChange(90)}
+              className="sr-only"
+            />
+            90 دقيقة
+          </label>
+          <label
+            className={`flex cursor-pointer items-center justify-center rounded-[10px] border px-4 py-3 text-sm font-semibold transition ${
+              duration === 120
+                ? "border-primary-blue bg-primary-blue/10 text-primary-blue"
+                : "border-light-grey bg-white text-primary-text"
+            }`}
+          >
+            <input
+              type="radio"
+              name="duration_minutes"
+              value="120"
+              checked={duration === 120}
+              onChange={() => onDurationChange(120)}
+              className="sr-only"
+            />
+            120 دقيقة
+          </label>
         </div>
         {pricePerSession !== null ? (
           <p className="mt-2 text-center text-sm text-grey">
@@ -240,6 +270,14 @@ export default function FreelanceEnglishRegistrationForm({
           </p>
         ) : null}
       </fieldset>
+
+      <SessionSlotPicker
+        tutorId={tutorId}
+        contentId={contentId}
+        durationMinutes={duration}
+        selectedSlot={selectedSlot}
+        onSlotChange={setSelectedSlot}
+      />
 
       {state === "error" && errorMessage ? (
         <p
@@ -253,10 +291,10 @@ export default function FreelanceEnglishRegistrationForm({
       <button
         type="submit"
         onClick={trackSubmitClick}
-        disabled={state === "loading"}
+        disabled={state === "loading" || !selectedSlot}
         className="w-full rounded-[10px] bg-primary-blue py-3.5 text-base font-bold text-off-white shadow-sm transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {state === "loading" ? "جاري الإرسال..." : "التسجيل"}
+        {state === "loading" ? "جاري الحجز..." : "احجز الحصة"}
       </button>
     </form>
   );
