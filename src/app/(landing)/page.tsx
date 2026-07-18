@@ -44,7 +44,7 @@ export default function HomeLandingPage() {
         </p>
 
         <div className="mt-8 w-full">
-          <OpenInBrowserButton appUrl={WEB_APP_HREF} label="افتح التطبيق" />
+          <OpenInBrowserButton appUrl={WEB_APP_HREF} label="ابدأ التحضير" />
         </div>
 
         <ul className="mt-8 w-full max-w-sm space-y-3 text-right" dir="rtl">

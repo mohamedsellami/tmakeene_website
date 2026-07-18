@@ -10,7 +10,7 @@ type OpenInBrowserButtonProps = {
 
 export default function OpenInBrowserButton({
   appUrl,
-  label = "افتح التطبيق",
+  label = "ابدأ التحضير",
 }: OpenInBrowserButtonProps) {
   const [showHint, setShowHint] = useState(false);
 
