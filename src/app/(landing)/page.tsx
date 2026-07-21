@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import OpenInBrowserButton from "@/components/landing/OpenInBrowserButton";
 
-const envWebApp = process.env.NEXT_PUBLIC_WEB_APP_URL;
-const WEB_APP_HREF =
-  envWebApp && envWebApp.length > 0
-    ? envWebApp.replace(/\/$/, "")
-    : "https://app.tafkira.app";
+const WHATSAPP_URL = "https://wa.me/213555677816";
 
 export const metadata: Metadata = {
   title: "تفكيرة — التحضير للآيلتس",
   description:
-    "تفكيرة يساعدك على التحضير للآيلتس: تدرب على المحادثة والاستماع مع معلمين. افتح التطبيق في متصفحك وابدأ الآن.",
+    "تفكيرة يساعدك على التحضير للآيلتس: تدرب على المحادثة والاستماع مع معلمين.",
 };
 
 const FEATURES = [
@@ -38,13 +33,19 @@ export default function HomeLandingPage() {
         <h1 className="text-2xl font-bold leading-snug text-off-white sm:text-3xl">
           استعد للآيلتس مع تفكيرة
         </h1>
-        <p className="mt-4 max-w-md text-base font-medium leading-relaxed text-off-white/90">
-          تدرب على المحادثة والاستماع والتحضير للامتحان. افتح التطبيق في
-          متصفحك وابدأ من حيث توقفت.
-        </p>
 
-        <div className="mt-8 w-full">
-          <OpenInBrowserButton appUrl={WEB_APP_HREF} label="ابدأ التحضير" />
+        <div className="mt-8 w-full max-w-sm rounded-[10px] border border-warm-amber/40 bg-warm-amber/15 px-5 py-5 text-center">
+          <p className="text-base font-bold leading-relaxed text-off-white">
+            التطبيق متوفر لعدد محدود. تواصل معنا على واتساب باش تحصل على نسختك.
+          </p>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex w-full items-center justify-center rounded-[10px] bg-classic-blue-green px-4 py-3.5 text-base font-bold text-off-white shadow-sm transition hover:opacity-95 active:opacity-90 sm:text-lg"
+          >
+            تواصل معنا الآن
+          </a>
         </div>
 
         <ul className="mt-8 w-full max-w-sm space-y-3 text-right" dir="rtl">
@@ -63,11 +64,6 @@ export default function HomeLandingPage() {
             </li>
           ))}
         </ul>
-
-        <p className="mt-4 max-w-sm text-xs leading-relaxed text-off-white/70">
-          ننصح بفتح التطبيق في Chrome أو Safari وليس داخل متصفح
-          إنستغرام أو فيسبوك، حتى لا تُفقد جلسة التدريب عند الإغلاق.
-        </p>
       </main>
 
       <footer className="mt-10 flex justify-center pt-2">
