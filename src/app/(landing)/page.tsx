@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
-const WHATSAPP_URL = "https://wa.me/213555677816";
+const WHATSAPP_MESSAGE = "سلام، حبيت نحصل على نسختي من تطبيق تفكيرة.";
+const WHATSAPP_URL = `https://wa.me/213555677816?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 export const metadata: Metadata = {
   title: "تفكيرة — التحضير للآيلتس",
