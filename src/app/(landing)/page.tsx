@@ -1,4 +1,11 @@
 import type { Metadata } from "next";
+import OpenInBrowserButton from "@/components/landing/OpenInBrowserButton";
+
+const envWebApp = process.env.NEXT_PUBLIC_WEB_APP_URL;
+const WEB_APP_HREF =
+  envWebApp && envWebApp.length > 0
+    ? envWebApp.replace(/\/$/, "")
+    : "https://app.tafkira.app";
 
 const WHATSAPP_MESSAGE = "سلام، حبيت نحصل على نسختي من تطبيق تفكيرة.";
 const WHATSAPP_URL = `https://wa.me/213555677816?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
@@ -6,7 +13,7 @@ const WHATSAPP_URL = `https://wa.me/213555677816?text=${encodeURIComponent(WHATS
 export const metadata: Metadata = {
   title: "تفكيرة — التحضير للآيلتس",
   description:
-    "تفكيرة يساعدك على التحضير للآيلتس: تدرب على المحادثة والاستماع مع معلمين.",
+    "تفكيرة يعطيك تدريب منظم على تكتيكات الأيلتس خطوة بخطوة، مجانا.",
 };
 
 const FEATURES = [
@@ -35,17 +42,25 @@ export default function HomeLandingPage() {
           استعد للآيلتس مع تفكيرة
         </h1>
 
-        <div className="mt-8 w-full max-w-sm rounded-[10px] border border-warm-amber/40 bg-warm-amber/15 px-5 py-5 text-center">
-          <p className="text-base font-bold leading-relaxed text-off-white">
-            التطبيق متوفر لعدد محدود. تواصل معنا على واتساب باش تحصل على نسختك.
+        <p className="mt-4 max-w-md text-base font-medium leading-relaxed text-off-white/90 sm:text-lg">
+          تفكيرة يعطيك تدريب منظم على تكتيكات الأيلتس خطوة بخطوة، مجانا.
+        </p>
+
+        <div className="mt-8 w-full">
+          <OpenInBrowserButton appUrl={WEB_APP_HREF} label="جرّب التطبيق" />
+        </div>
+
+        <div className="mt-6 w-full max-w-sm text-center">
+          <p className="text-sm font-medium leading-relaxed text-off-white/85 sm:text-base">
+            إذا حبيت تحمّل تطبيق أندرويد، تواصل معنا عبر واتساب.
           </p>
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 inline-flex w-full items-center justify-center rounded-[10px] bg-classic-blue-green px-4 py-3.5 text-base font-bold text-off-white shadow-sm transition hover:opacity-95 active:opacity-90 sm:text-lg"
+            className="mt-4 inline-flex w-full items-center justify-center rounded-[10px] border-2 border-off-white/40 bg-transparent px-4 py-3.5 text-base font-bold text-off-white transition hover:bg-white/10 active:bg-white/15 sm:text-lg"
           >
-            تواصل معنا الآن
+            تواصل معنا على واتساب
           </a>
         </div>
 
