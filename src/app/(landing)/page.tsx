@@ -43,11 +43,12 @@ export default function HomeLandingPage() {
         </h1>
 
         <p className="mt-4 max-w-md text-base font-medium leading-relaxed text-off-white/90 sm:text-lg">
-          تفكيرة يعطيك تدريب منظم على تكتيكات الأيلتس خطوة بخطوة، مجانا.
+          تدرب على المحادثة والاستماع والتحضير للامتحان. افتح التطبيق في متصفحك
+          وابدأ من حيث توقفت.
         </p>
 
         <div className="mt-8 w-full">
-          <OpenInBrowserButton appUrl={WEB_APP_HREF} label="جرّب التطبيق" />
+          <OpenInBrowserButton appUrl={WEB_APP_HREF} label="ابدأ التحضير" />
         </div>
 
         <div className="mt-6 w-full max-w-sm text-center">
