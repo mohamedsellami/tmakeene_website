@@ -121,7 +121,7 @@ export default function AmaSessionHero({
         </div>
 
         <div className="mt-5">
-          <p className="text-sm font-medium text-white/70">الاستاذ الموافق</p>
+          <p className="text-sm font-medium text-white/70">مع الأستاذة</p>
           <p className="mt-1 text-lg font-bold sm:text-xl">
             {teacherName || "—"}
           </p>
