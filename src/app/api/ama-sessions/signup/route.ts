@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { AMA_SESSION_MAX_SIGNUPS } from "@/lib/ama-session";
+import { AMA_SESSION_MAX_SIGNUPS, AMA_SESSION_TITLE } from "@/lib/ama-session";
+import { sendAmaSignupNotificationEmail } from "@/lib/ama-session-email";
 import { getSupabaseAdmin, isSupabaseConfigured } from "@/lib/supabase/server";
 
 type SignupPayload = {
@@ -37,7 +38,7 @@ export async function POST(request: Request) {
 
     const { data: session, error: sessionError } = await supabase
       .from("ama_sessions")
-      .select("id, tutor_id, status")
+      .select("id, tutor_id, status, scheduled_at, schedule_label")
       .eq("id", amaSessionId)
       .maybeSingle();
 
@@ -83,7 +84,9 @@ export async function POST(request: Request) {
       );
     }
 
-    if ((count ?? 0) >= AMA_SESSION_MAX_SIGNUPS) {
+    const previousSignupCount = count ?? 0;
+
+    if (previousSignupCount >= AMA_SESSION_MAX_SIGNUPS) {
       return NextResponse.json(
         { error: "عذراً، اكتملت الأماكن في هذه الجلسة." },
         { status: 400 },
@@ -111,6 +114,31 @@ export async function POST(request: Request) {
         { error: "تعذر إتمام التسجيل. حاول مرة أخرى." },
         { status: 500 },
       );
+    }
+
+    try {
+      const { data: tutor } = await supabase
+        .from("tutors")
+        .select("display_name")
+        .eq("id", tutorId)
+        .maybeSingle();
+
+      await sendAmaSignupNotificationEmail({
+        name,
+        phone,
+        userId,
+        tutorId,
+        tutorName: tutor?.display_name?.trim() || undefined,
+        amaSessionId,
+        sessionTitle: AMA_SESSION_TITLE,
+        scheduledAt: session.scheduled_at ?? undefined,
+        scheduleLabel: session.schedule_label ?? undefined,
+        signupCount: previousSignupCount + 1,
+        maxSignups: AMA_SESSION_MAX_SIGNUPS,
+      });
+    } catch (emailError) {
+      // Signup is saved even if the notification email fails.
+      console.error("ama signup email error:", emailError);
     }
 
     return NextResponse.json({ ok: true });
