@@ -98,15 +98,7 @@ export default function AmaSessionPageContent() {
 
   return (
     <>
-      <AmaSessionHero
-        sessionTitle={session.title || AMA_SESSION_TITLE}
-        teacherName={session.tutorName}
-        scheduleLabel={session.scheduleLabel}
-        scheduledAt={session.scheduledAt}
-        registrationOpen={registrationOpen}
-      />
-
-      <div id="register" className="scroll-mt-24">
+      <div id="register" className="mb-10 scroll-mt-24 sm:mb-12">
         <h2 className="text-center text-2xl font-bold text-midnight-blue sm:text-3xl">
           سجّل في الجلسة
         </h2>
@@ -127,6 +119,13 @@ export default function AmaSessionPageContent() {
           />
         </div>
       </div>
+
+      <AmaSessionHero
+        sessionTitle={session.title || AMA_SESSION_TITLE}
+        teacherName={session.tutorName}
+        scheduleLabel={session.scheduleLabel}
+        scheduledAt={session.scheduledAt}
+      />
     </>
   );
 }

@@ -8,7 +8,6 @@ type AmaSessionHeroProps = {
   teacherName: string;
   scheduleLabel: string;
   scheduledAt: string;
-  registrationOpen: boolean;
 };
 
 function CheckIcon() {
@@ -87,7 +86,6 @@ export default function AmaSessionHero({
   teacherName,
   scheduleLabel,
   scheduledAt,
-  registrationOpen,
 }: AmaSessionHeroProps) {
   const targetMs = new Date(scheduledAt).getTime();
   const [nowMs, setNowMs] = useState(() => Date.now());
@@ -105,7 +103,7 @@ export default function AmaSessionHero({
     scheduleLabel.trim() || formatScheduledAtFallback(scheduledAt);
 
   return (
-    <div className="mx-auto mb-8 w-full max-w-sm sm:mb-10">
+    <div className="mx-auto w-full max-w-sm">
       <div className="overflow-hidden rounded-2xl bg-midnight-blue px-5 pb-6 pt-6 text-center text-off-white shadow-sm sm:px-6 sm:pb-7 sm:pt-7">
         <div className="flex justify-center">
           <span className="inline-flex items-center rounded-full bg-warm-amber px-3 py-1 text-xs font-bold text-midnight-blue sm:text-sm">
@@ -168,14 +166,6 @@ export default function AmaSessionHero({
           </ul>
         </div>
 
-        {registrationOpen && countdown ? (
-          <a
-            href="#register"
-            className="mt-6 flex w-full items-center justify-center rounded-[10px] border-b-4 border-white/30 bg-primary-blue px-6 py-3.5 text-center text-base font-bold text-off-white transition hover:opacity-95"
-          >
-            سجّل الآن
-          </a>
-        ) : null}
       </div>
     </div>
   );
