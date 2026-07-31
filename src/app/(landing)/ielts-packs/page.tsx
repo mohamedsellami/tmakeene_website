@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import OpenInBrowserButton from "@/components/landing/OpenInBrowserButton";
 
-const PACKS_APP_HREF = "https://tafkira.app/packs";
+const PACKS_APP_HREF = "https://app.tafkira.app/packs";
 
 export const metadata: Metadata = {
   title: "تفكيرة — دورات التحضير للآيلتس",
