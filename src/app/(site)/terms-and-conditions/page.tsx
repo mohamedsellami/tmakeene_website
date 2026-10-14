@@ -115,8 +115,8 @@ export default function TermsAndConditionsPage() {
           <h2 className="font-bold text-midnight-blue">13. التواصل</h2>
           <p>يمكن لولي الأمر التواصل معنا عبر:</p>
           <ul className="list-disc space-y-1 pe-6">
-            <li>البريد الإلكتروني: support@tamkeen.app</li>
-            <li>رقم الهاتف لأي دعم أو استفسار: 0555677816</li>
+            <li>البريد الإلكتروني: tafkira.team@gmail.com</li>
+            <li>واتساب لأي دعم أو استفسار: +213665687984</li>
           </ul>
         </section>
       </div>

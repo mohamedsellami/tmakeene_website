@@ -11,15 +11,30 @@ const DEFAULT_NAV_LINKS = [
 ] as const;
 
 const IELTS_PREPARATION_HOME = "/ielts-preparation";
+const BEM_FOLLOW_UP_HOME = "/bem-follow-up";
+
+const BEM_NAV_LINKS = [
+  { href: BEM_FOLLOW_UP_HOME, label: "الرئيسية" },
+  { href: "/privacy-policy", label: "سياسة الخصوصية" },
+  { href: "/terms-and-conditions", label: "الشروط والأحكام" },
+] as const;
 
 function useSiteNav() {
   const pathname = usePathname();
   const isIeltsPreparation = pathname === IELTS_PREPARATION_HOME;
+  const isBemFollowUp = pathname === BEM_FOLLOW_UP_HOME;
 
   if (isIeltsPreparation) {
     return {
       homeHref: IELTS_PREPARATION_HOME,
       navLinks: [{ href: IELTS_PREPARATION_HOME, label: "الرئيسية" }] as const,
+    };
+  }
+
+  if (isBemFollowUp) {
+    return {
+      homeHref: BEM_FOLLOW_UP_HOME,
+      navLinks: BEM_NAV_LINKS,
     };
   }
 

@@ -2,5 +2,5 @@
 export function getWhatsAppUrl(): string {
   const u = process.env.NEXT_PUBLIC_WHATSAPP_URL;
   if (u && u.length > 0) return u.trim();
-  return "https://wa.me/";
+  return "https://wa.me/213665687984";
 }

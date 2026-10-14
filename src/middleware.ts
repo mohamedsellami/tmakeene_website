@@ -9,7 +9,12 @@ export function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  if (pathname === "/coming-soon") {
+  if (
+    pathname === "/coming-soon" ||
+    pathname === "/bem-follow-up" ||
+    pathname === "/privacy-policy" ||
+    pathname === "/terms-and-conditions"
+  ) {
     return NextResponse.next();
   }
 

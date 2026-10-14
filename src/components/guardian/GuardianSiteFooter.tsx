@@ -13,11 +13,21 @@ const IELTS_PREPARATION_FOOTER_LINKS = [
   { href: "/ielts-preparation", label: "الرئيسية" },
 ] as const;
 
+const BEM_FOLLOW_UP_FOOTER_LINKS = [
+  { href: "/bem-follow-up", label: "الرئيسية" },
+  { href: "/privacy-policy", label: "سياسة الخصوصية" },
+  { href: "/terms-and-conditions", label: "الشروط والأحكام" },
+] as const;
+
 function useFooterLinks() {
   const pathname = usePathname();
 
   if (pathname === "/ielts-preparation") {
     return IELTS_PREPARATION_FOOTER_LINKS;
+  }
+
+  if (pathname === "/bem-follow-up") {
+    return BEM_FOLLOW_UP_FOOTER_LINKS;
   }
 
   return DEFAULT_FOOTER_LINKS;
@@ -55,12 +65,21 @@ export default function GuardianSiteFooter() {
               </li>
             ))}
           </ul>
-          <p className="text-sm">
+          <p className="flex flex-col gap-2 text-sm sm:flex-row sm:gap-6">
             <a
-              href="mailto:mohamedsellamidev@gmail.com"
+              href="mailto:tafkira.team@gmail.com"
               className="font-medium text-off-white underline-offset-4 transition hover:underline"
             >
-              mohamedsellamidev@gmail.com
+              tafkira.team@gmail.com
+            </a>
+            <a
+              href="https://wa.me/213665687984"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-off-white underline-offset-4 transition hover:underline"
+              dir="ltr"
+            >
+              +213665687984
             </a>
           </p>
         </div>

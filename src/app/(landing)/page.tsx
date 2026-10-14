@@ -8,7 +8,7 @@ const WEB_APP_HREF =
     : "https://app.tafkira.app";
 
 const WHATSAPP_MESSAGE = "سلام، حبيت نحصل على نسختي من تطبيق تفكيرة.";
-const WHATSAPP_URL = `https://wa.me/213555677816?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+const WHATSAPP_URL = `https://wa.me/213665687984?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 export const metadata: Metadata = {
   title: "تفكيرة — التحضير للآيلتس",
