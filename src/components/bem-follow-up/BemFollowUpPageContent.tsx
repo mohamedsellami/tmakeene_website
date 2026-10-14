@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ExpandableStepImage from "@/components/bem-follow-up/ExpandableStepImage";
 import BemFollowUpFAQ from "@/components/bem-follow-up/BemFollowUpFAQ";
 import BemFollowUpForm from "@/components/bem-follow-up/BemFollowUpForm";
 
@@ -82,13 +83,11 @@ function StepCard({
           {children}
         </div>
       </div>
-      <Image
+      <ExpandableStepImage
         src={image}
         alt={imageAlt}
         width={width}
         height={height}
-        sizes="(min-width: 1024px) 280px, 100vw"
-        className="mx-auto h-auto w-full max-w-sm rounded-2xl lg:max-w-none"
       />
     </li>
   );
