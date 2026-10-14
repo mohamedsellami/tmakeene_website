@@ -101,7 +101,7 @@ export default function BemFollowUpPageContent() {
         <div className="mx-auto grid max-w-6xl items-center gap-6 lg:grid-cols-2 lg:gap-12">
           <div>
             <p className="inline-flex rounded-full bg-classic-blue-green/15 px-3 py-1 text-sm font-bold text-classic-blue-green">
-              متابعة مجانية · أسبوعين · 3 تقارير على واتساب
+              متابعة مجانية · أسبوعين · 3 ملخصات التقدّم على واتساب
             </p>
             <h1 className="mt-4 text-3xl font-bold leading-snug text-midnight-blue sm:text-4xl">
               تابعي تقدّم إبنك في الرياضيات، بلا ضغط
@@ -115,13 +115,13 @@ export default function BemFollowUpPageContent() {
                 ابدئي المتابعة المجانية
               </a>
               <p className="mt-3 text-sm font-medium text-midnight-blue">
-                3 تقارير خلال أسبوعين، توصلك عبر واتساب حسب نشاط إبنك في تفكيرة.
+                3 ملخصات التقدّم خلال أسبوعين، توصلك عبر واتساب حسب نشاط إبنك في تفكيرة.
               </p>
             </div>
           </div>
           <Image
             src="/assets/illustrations/mother-son-BEM.jpg"
-            alt="أم تجلس بجانب ابنها وتتابع معه تقرير تقدّمه في الرياضيات"
+            alt="أم تجلس بجانب ابنها وتتابع معه ملخّص تقدّمه في الرياضيات"
             width={6144}
             height={4096}
             priority
@@ -134,16 +134,16 @@ export default function BemFollowUpPageContent() {
       <section className="bg-white px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-2xl font-bold text-midnight-blue sm:text-center sm:text-3xl">
-            هكذا يجيك التقرير
+            هكذا يجيك ملخّص التقدّم
           </h2>
           <p className="mt-2 max-w-2xl text-base leading-relaxed text-grey sm:mx-auto sm:text-center">
-            مثال توضيحي. التقرير الحقيقي يوصلك على واتساب، والتفاصيل تجي من
+            مثال توضيحي. ملخّص التقدّم يوصلك على واتساب، والتفاصيل تجي من
             نشاط إبنك في التطبيق.
           </p>
           <div className="mt-6 grid items-center gap-5 lg:grid-cols-2 lg:gap-10">
             <Image
               src="/assets/illustrations/mother-daughter-BEM.png"
-              alt="أم تراجع الرياضيات مع ابنتها وبجانبهما تقرير التقدّم"
+              alt="أم تراجع الرياضيات مع ابنتها وبجانبهما ملخّص التقدّم"
               width={5996}
               height={3404}
               sizes="(min-width: 1024px) 520px, 100vw"
@@ -153,7 +153,7 @@ export default function BemFollowUpPageContent() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-sm font-bold text-midnight-blue">
-                    تقرير التقدّم
+                    ملخّص التقدّم
                   </p>
                   <p className="mt-1 text-xs text-grey">
                     رياضيات · الرابعة متوسط
@@ -186,7 +186,7 @@ export default function BemFollowUpPageContent() {
       <section className="bg-off-white px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-2xl font-bold text-midnight-blue sm:text-center sm:text-3xl">
-            3 تقارير في أسبوعين
+            3 ملخصات التقدّم في أسبوعين
           </h2>
           <ol className="mt-5 grid gap-3 lg:grid-cols-3">
             {REPORTS.map((report) => (
@@ -204,7 +204,7 @@ export default function BemFollowUpPageContent() {
             ))}
           </ol>
           <p className="mt-4 text-sm leading-relaxed text-grey sm:text-center">
-            إذا كان النشاط قليل، التقرير يبقى نظرة أولية. ما نقدّموش استنتاجات
+            إذا كان النشاط قليل، ملخّص التقدّم يبقى نظرة أولية. ما نقدّموش استنتاجات
             ما عندناش عليها دليل.
           </p>
         </div>
@@ -306,7 +306,7 @@ export default function BemFollowUpPageContent() {
             >
               <p>
                 خلال الأسبوعين، خلي إبنك يراجع في تفكيرة. كل ما زاد النشاط،
-                وضّح التقرير.
+                وضّح ملخّص التقدّم.
               </p>
             </StepCard>
           </ol>

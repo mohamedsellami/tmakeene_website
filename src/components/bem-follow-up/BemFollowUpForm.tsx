@@ -155,7 +155,7 @@ export default function BemFollowUpForm() {
           معرّف المستخدم تاع إبنك
         </label>
         <p className="mb-1.5 text-xs leading-relaxed text-grey">
-          باش نربطو التقرير بإبنك في التطبيق.
+          باش نربطو ملخّص التقدّم بإبنك في التطبيق.
         </p>
         <input
           id="bem-child-id"
@@ -173,10 +173,10 @@ export default function BemFollowUpForm() {
           htmlFor="bem-whatsapp"
           className="mb-1 block text-sm font-semibold text-midnight-blue"
         >
-          رقم واتساب لاستقبال التقارير
+          رقم واتساب لاستقبال ملخصات التقدّم
         </label>
         <p className="mb-1.5 text-xs leading-relaxed text-grey">
-          باش نرسلولك التقارير.
+          باش نرسلولك ملخصات التقدّم.
         </p>
         <input
           id="bem-whatsapp"
@@ -203,8 +203,8 @@ export default function BemFollowUpForm() {
           />
           <span className="leading-relaxed">
             أوافق على استخدام معرّف طفلي وبيانات أنشطته ونتائج تمارينه في تفكيرة
-            لإعداد تقارير عن تقدّمه التعليمي وإرسالها إلى رقم واتساب الذي قدّمته.
-            أفهم أن فريق تفكيرة سيطّلع على هذه البيانات لإعداد التقارير، ويمكنني
+            لإعداد ملخصات التقدّم وإرسالها إلى رقم واتساب الذي قدّمته.
+            أفهم أن فريق تفكيرة سيطّلع على هذه البيانات لإعداد ملخصات التقدّم، ويمكنني
             سحب موافقتي أو طلب حذف البيانات عبر وسائل التواصل الموضّحة في{" "}
             <Link
               href="/privacy-policy"
